@@ -1,0 +1,7 @@
+.vscode/
+.tscache/
+node_modules/
+bin/
+lib/
+
+package-lock.json

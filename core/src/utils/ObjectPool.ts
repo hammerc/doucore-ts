@@ -1,5 +1,5 @@
 namespace dou {
-    export type Creator<T> = {new(): T};
+    export type Creator<T> = { new(): T };
 
     /**
      * 对象池
@@ -21,8 +21,8 @@ namespace dou {
         }
 
         public join(obj: T): void {
-            if (typeof (<any> obj).onRecycle === "function") {
-                (<any> obj).onRecycle();
+            if (typeof (<any>obj).onRecycle === "function") {
+                (<any>obj).onRecycle();
             }
             if (this._list.length < this._maxCount) {
                 if (this._list.indexOf(obj) == -1) {
@@ -34,11 +34,11 @@ namespace dou {
         public take(): T {
             let obj: T;
             if (this._list.length == 0) {
-                obj = new (<any> this._creator)();
+                obj = new (<any>this._creator)();
             } else {
                 obj = this._list.pop();
-                if (typeof (<any> obj).onReuse === "function") {
-                    (<any> obj).onReuse();
+                if (typeof (<any>obj).onReuse === "function") {
+                    (<any>obj).onReuse();
                 }
             }
             return obj;

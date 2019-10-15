@@ -79,9 +79,9 @@ namespace dou {
         /**
          * 加载指定项
          */
-        public load(url: string, callback?: (url: string, data: any) => void, thisObj?: any, type?: string, priority: number = 0, cache: boolean = true): void {
+        public load(url: string, callback?: (data: any, url: string) => void, thisObj?: any, type?: string, priority: number = 0, cache: boolean = true): void {
             if (this.isLoaded(url)) {
-                callback.call(thisObj, url, this.get(url));
+                callback.call(thisObj, this.get(url), url);
                 return;
             }
             if (!type) {
@@ -107,12 +107,16 @@ namespace dou {
         }
 
         private getDefaultType(url: string): string {
+            let suffix: string;
             let regexp = /\.(\w+)\?|\.(\w+)$/;
             let result = regexp.exec(url);
             if (result) {
-                return result[1] || result[2];
+                suffix = result[1] || result[2];
             }
-            return null;
+            if (this._extensionMap.hasOwnProperty(suffix)) {
+                return this._extensionMap[suffix];
+            }
+            return suffix;
         }
 
         private sortFunc(a: number, b: number): number {

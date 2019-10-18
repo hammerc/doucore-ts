@@ -144,6 +144,7 @@ namespace dou {
                     this._loadingMap[item.url] = true;
                     let analyzer = this._analyzerMap[item.type];
                     analyzer.load(this._resourceRoot + item.url, (url, data) => {
+                        this._nowLoadingThread--;
                         delete this._loadingMap[url];
                         let items = this._keyMap[url];
                         if (items && items.length > 0) {
@@ -194,7 +195,7 @@ namespace dou {
                 callback.call(thisObj, current, total, url, data);
             };
             for (let item of items) {
-                this.load(item.url, itemCallback, this, item.url, item.priority, item.cache);
+                this.load(item.url, itemCallback, this, item.type, item.priority, item.cache);
             }
         }
 

@@ -31,7 +31,7 @@ namespace dou {
         }
 
         public get response(): any {
-            if (!this._xhr) {
+            if (this._xhr) {
                 return this._xhr.response;
             }
             return null;

@@ -87,6 +87,9 @@
     "src/net/SoundLoader.ts",
     "src/net/Socket.ts",
 
+    "src/tween/Ease.ts",
+    "src/tween/Tween.ts",
+
     "src/utils/getTimer.ts",
     "src/utils/ICacheable.ts",
     "src/utils/ObjectPool.ts",

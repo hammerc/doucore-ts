@@ -5,6 +5,7 @@ namespace dou {
      */
     export class Event extends HashObject implements ICacheable {
         public static OPEN: string = "open";
+        public static CHANGE: string = "change";
         public static COMPLETE: string = "complete";
         public static MESSAGE: string = "message";
         public static CLOSE: string = "close";

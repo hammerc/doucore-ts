@@ -21,7 +21,11 @@ gulp.task("uglify", function () {
 
 gulp.task("copy", function () {
   return gulp.src("bin/**/*")
-    .pipe(gulp.dest("../examples/lib"));
+    .pipe(gulp.dest("../examples/lib"))
+    .pipe(gulp.dest("../../dou2d-ts/core/lib"))
+    .pipe(gulp.dest("../../dou2d-ts/examples/lib"))
+    .pipe(gulp.dest("../../dou3d-ts/core/lib"))
+    .pipe(gulp.dest("../../dou3d-ts/examples/lib"));
 });
 
 gulp.task("default", gulp.series("ts", "uglify", "copy"));

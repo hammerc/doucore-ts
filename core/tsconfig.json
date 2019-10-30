@@ -63,6 +63,9 @@
   },
   /* 注: 如果有继承关系的, 父类必须排在子类前面 */
   "files": [
+    "src/extends/Polyfill.ts",
+    "src/extends/Extend.ts",
+
     "src/core/defined.ts",
     "src/core/HashObject.ts",
     "src/core/TickerBase.ts",

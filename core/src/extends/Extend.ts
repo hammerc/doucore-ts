@@ -1,34 +1,5 @@
 interface Object {
     /**
-     * 获取属性描述
-     */
-    getPropertyDescriptor(property: string): PropertyDescriptor;
-
-    /**
-     * 浅拷贝当前对象
-     * * 注意: 仅浅拷贝属性, 继承原型链和方法等均会丢失
-     */
-    shallowClone(): Object;
-
-    /**
-     * 浅拷贝所有属性
-     * * 注意: 仅浅拷贝属性, 继承原型链和方法等均会丢失
-     */
-    shallowCloneTo(target: Object): void;
-
-    /**
-     * 深拷贝当前对象
-     * * 注意: 仅深拷贝属性, 继承原型链和方法等均会丢失
-     */
-    deepClone(): Object;
-
-    /**
-     * 深拷贝所有属性
-     * * 注意: 仅深拷贝属性, 继承原型链和方法等均会丢失
-     */
-    deepCloneTo(target: Object): void;
-
-    /**
      * 清除所有属性
      */
     clearAllProperty(): void;
@@ -71,11 +42,6 @@ interface ArrayConstructor {
 
 interface Array<T> {
     /**
-     * 判断是否包含指定数据
-     */
-    contains(...args: T[]): boolean;
-
-    /**
      * 添加唯一数据
      */
     pushUnique(...args: T[]): number;
@@ -109,66 +75,6 @@ interface Date {
 
     p = Object.prototype;
     Object.defineProperties(p, {
-        getPropertyDescriptor: {
-            value: function (property: string) {
-                let pd = Object.getOwnPropertyDescriptor(this, property);
-                if (pd) {
-                    return pd;
-                }
-                let prototype = Object.getPrototypeOf(this);
-                if (prototype) {
-                    return prototype.getPropertyDescriptor(property);
-                }
-                return undefined;
-            },
-            enumerable: false
-        },
-        shallowClone: {
-            value: function () {
-                let result = {};
-                this.shallowCloneTo(result);
-                return result;
-            },
-            enumerable: false
-        },
-        shallowCloneTo: {
-            value: function (target: Object) {
-                for (let key in this) {
-                    if (key in target) {
-                        let pd: PropertyDescriptor = target.getPropertyDescriptor(key);
-                        if (pd && (pd.set || pd.writable)) {
-                            target[key] = this[key];
-                        }
-                    } else {
-                        target[key] = this[key];
-                    }
-                }
-            },
-            enumerable: false
-        },
-        deepClone: {
-            value: function () {
-                let jsonStr = JSON.stringify(this);
-                return JSON.parse(jsonStr);
-            },
-            enumerable: false
-        },
-        deepCloneTo: {
-            value: function (target: Object) {
-                let obj = this.deepClone();
-                for (let key in obj) {
-                    if (key in target) {
-                        let pd: PropertyDescriptor = target.getPropertyDescriptor(key);
-                        if (pd && (pd.set || pd.writable)) {
-                            target[key] = obj[key];
-                        }
-                    } else {
-                        target[key] = obj[key];
-                    }
-                }
-            },
-            enumerable: false
-        },
         clearAllProperty: {
             value: function () {
                 for (let key in this) {
@@ -202,17 +108,6 @@ interface Date {
 
     p = Array.prototype;
     Object.defineProperties(p, {
-        contains: {
-            value: function (...args: any[]) {
-                for (let v of args) {
-                    if (this.indexOf(v) == -1) {
-                        return false;
-                    }
-                }
-                return true;
-            },
-            enumerable: false
-        },
         pushUnique: {
             value: function (...args: any[]) {
                 for (let v of args) {

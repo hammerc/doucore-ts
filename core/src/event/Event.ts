@@ -3,7 +3,7 @@ namespace dou {
      * 事件类
      * @author wizardc
      */
-    export class Event extends HashObject implements ICacheable {
+    export class Event implements ICacheable {
         public static OPEN: string = "open";
         public static CHANGE: string = "change";
         public static COMPLETE: string = "complete";

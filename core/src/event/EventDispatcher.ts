@@ -3,11 +3,10 @@ namespace dou {
      * 事件发送器
      * @author wizardc
      */
-    export class EventDispatcher extends HashObject implements IEventDispatcher {
+    export class EventDispatcher implements IEventDispatcher {
         private $map: { [type: string]: Recyclable<EventBin>[] };
 
         public constructor() {
-            super();
             this.$map = {};
         }
 

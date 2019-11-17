@@ -1,7 +1,7 @@
 var gulp = require("gulp");
 var rename = require("gulp-rename");
 var ts = require("gulp-typescript");
-var uglify = require("gulp-uglify");
+var uglify = require("gulp-uglify-es").default;
 var del = require('del');
 
 gulp.task("ts", function () {

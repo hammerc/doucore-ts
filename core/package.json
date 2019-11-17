@@ -9,11 +9,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "del": "^4.1.0",
     "gulp": "^4.0.1",
     "gulp-rename": "^1.4.0",
     "gulp-typescript": "^5.0.1",
-    "gulp-uglify": "^3.0.2",
-    "del": "^4.1.0",
+    "gulp-uglify-es": "^2.0.0",
     "typescript": "^3.4.3"
   }
 }

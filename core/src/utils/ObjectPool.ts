@@ -9,11 +9,13 @@ namespace dou {
         private _creator: Creator<T>;
         private _maxCount: number;
         private _list: T[];
+        private _map: Map<T, boolean>;
 
         public constructor(creator: Creator<T>, maxCount: number = 50) {
             this._creator = creator;
             this._maxCount = maxCount;
             this._list = [];
+            this._map = new Map();
         }
 
         public get size(): number {
@@ -25,7 +27,8 @@ namespace dou {
                 (<any>obj).onRecycle();
             }
             if (this._list.length < this._maxCount) {
-                if (this._list.indexOf(obj) == -1) {
+                if (!this._map.has(obj)) {
+                    this._map.set(obj, true);
                     this._list.push(obj);
                 }
             }
@@ -37,6 +40,7 @@ namespace dou {
                 obj = new (<any>this._creator)();
             } else {
                 obj = this._list.pop();
+                this._map.delete(obj);
                 if (typeof (<any>obj).onReuse === "function") {
                     (<any>obj).onReuse();
                 }
@@ -46,6 +50,7 @@ namespace dou {
 
         public clear(): void {
             this._list.length = 0;
+            this._map.clear();
         }
     }
 }

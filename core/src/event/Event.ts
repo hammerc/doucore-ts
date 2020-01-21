@@ -39,7 +39,7 @@ namespace dou {
             return this._target;
         }
 
-        public setTarget(target: IEventDispatcher): void {
+        public $setTarget(target: IEventDispatcher): void {
             this._target = target;
         }
 
@@ -52,7 +52,7 @@ namespace dou {
             }
         }
 
-        public isDefaultPrevented(): boolean {
+        public $isDefaultPrevented(): boolean {
             return this._isDefaultPrevented;
         }
 

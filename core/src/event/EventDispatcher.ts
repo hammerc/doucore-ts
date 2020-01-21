@@ -51,7 +51,7 @@ namespace dou {
             if (list.length == 0) {
                 return true;
             }
-            event.setTarget(this);
+            event.$setTarget(this);
             let currentIndex = 0;
             for (var i = 0, len = list.length; i < len; i++) {
                 let bin = list[i];
@@ -78,8 +78,8 @@ namespace dou {
                 }
                 list.length = currentIndex;
             }
-            event.setTarget(null);
-            return !event.isDefaultPrevented;
+            event.$setTarget(null);
+            return !event.$isDefaultPrevented;
         }
 
         public dispatch(type: string, data?: any, cancelable?: boolean): boolean {

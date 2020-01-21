@@ -14,7 +14,7 @@ namespace dou {
         private _eofByte: number = -1;
         private _eofCodePoint: number = -1;
 
-        constructor(buffer?: ArrayBuffer | Uint8Array, bufferExtSize: number = 0) {
+        public constructor(buffer?: ArrayBuffer | Uint8Array, bufferExtSize: number = 0) {
             if (bufferExtSize < 0) {
                 bufferExtSize = 0;
             }

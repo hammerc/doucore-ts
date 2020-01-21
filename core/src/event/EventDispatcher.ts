@@ -79,7 +79,7 @@ namespace dou {
                 list.length = currentIndex;
             }
             event.$setTarget(null);
-            return !event.$isDefaultPrevented;
+            return !event.$isDefaultPrevented();
         }
 
         public dispatch(type: string, data?: any, cancelable?: boolean): boolean {

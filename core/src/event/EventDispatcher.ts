@@ -4,22 +4,22 @@ namespace dou {
      * @author wizardc
      */
     export class EventDispatcher implements IEventDispatcher {
-        private $map: { [type: string]: Recyclable<EventBin>[] };
+        private _eventMap: { [type: string]: Recyclable<EventBin>[] };
 
         public constructor() {
-            this.$map = {};
+            this._eventMap = {};
         }
 
         public on(type: string, listener: Function, thisObj?: any): void {
-            this.$addEvent(type, listener, thisObj, false);
+            this.addEventListener(type, listener, thisObj, false);
         }
 
         public once(type: string, listener: Function, thisObj?: any): void {
-            this.$addEvent(type, listener, thisObj, true);
+            this.addEventListener(type, listener, thisObj, true);
         }
 
-        private $addEvent(type: string, listener: Function, thisObj: any, once: boolean): boolean {
-            let map = this.$map;
+        protected addEventListener(type: string, listener: Function, thisObj: any, once: boolean): boolean {
+            let map = this._eventMap;
             if (!map.hasOwnProperty(type)) {
                 map[type] = [];
             }
@@ -39,11 +39,11 @@ namespace dou {
         }
 
         public has(type: string): boolean {
-            return this.$map.hasOwnProperty(type) && this.$map[type].length > 0;
+            return this._eventMap.hasOwnProperty(type) && this._eventMap[type].length > 0;
         }
 
         public dispatchEvent(event: Event): boolean {
-            let map = this.$map;
+            let map = this._eventMap;
             if (!map.hasOwnProperty(event.type)) {
                 return true;
             }
@@ -91,7 +91,7 @@ namespace dou {
         }
 
         public off(type: string, listener: Function, thisObj?: any): void {
-            let map = this.$map;
+            let map = this._eventMap;
             if (map.hasOwnProperty(type)) {
                 let list = map[event.type];
                 for (let i = 0, len = list.length; i < len; i++) {

@@ -1,3 +1,16 @@
+namespace dispatcher {
+    /**
+     * 抛出事件
+     */
+    export function event(target: dou.IEventDispatcher, type: string, data?: any, cancelable?: boolean): boolean {
+        let event = dou.recyclable(dou.Event);
+        event.$initEvent(type, data, cancelable);
+        let result = target.dispatchEvent(event);
+        event.recycle();
+        return result;
+    }
+}
+
 namespace dou {
     /**
      * 事件类
@@ -18,12 +31,6 @@ namespace dou {
 
         private _target: IEventDispatcher;
 
-        public init(type: string, data?: any, cancelable?: boolean): void {
-            this._type = type;
-            this._data = data;
-            this._cancelable = cancelable;
-        }
-
         public get type(): string {
             return this._type;
         }
@@ -38,6 +45,12 @@ namespace dou {
 
         public get target(): IEventDispatcher {
             return this._target;
+        }
+
+        public $initEvent(type: string, data?: any, cancelable?: boolean): void {
+            this._type = type;
+            this._data = data;
+            this._cancelable = cancelable;
         }
 
         public $setTarget(target: IEventDispatcher): void {

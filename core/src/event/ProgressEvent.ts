@@ -1,3 +1,16 @@
+namespace dispatcher {
+    /**
+     * 抛出进度事件
+     */
+    export function progress(target: dou.IEventDispatcher, type: string, loaded: number, total: number, cancelable?: boolean): boolean {
+        let event = dou.recyclable(dou.ProgressEvent);
+        event.$initProgressEvent(type, loaded, total, cancelable);
+        let result = target.dispatchEvent(event);
+        event.recycle();
+        return result;
+    }
+}
+
 namespace dou {
     /**
      * 进度事件类
@@ -5,14 +18,6 @@ namespace dou {
      */
     export class ProgressEvent extends Event {
         public static PROGRESS: string = "progress";
-
-        public static dispatch(target: IEventDispatcher, type: string, loaded: number, total: number, cancelable?: boolean): boolean {
-            let event = recyclable(ProgressEvent);
-            event.initEvent(type, loaded, total, cancelable);
-            let result = target.dispatchEvent(event);
-            event.recycle();
-            return result;
-        }
 
         private _loaded: number;
         private _total: number;
@@ -25,8 +30,8 @@ namespace dou {
             return this._total;
         }
 
-        public initEvent(type: string, loaded: number, total: number, cancelable?: boolean): void {
-            this.init(type, null, cancelable);
+        public $initProgressEvent(type: string, loaded: number, total: number, cancelable?: boolean): void {
+            this.$initEvent(type, null, cancelable);
             this._loaded = loaded;
             this._total = total;
         }

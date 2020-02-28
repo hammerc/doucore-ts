@@ -29,7 +29,7 @@ namespace dou.impl {
             request.addEventListener("load", function () {
                 let ioError = request.status >= 400;
                 if (ioError) {
-                    IOErrorEvent.dispatch(self, IOErrorEvent.IO_ERROR, `Audio Error: ${self._url}`);
+                    dispatcher.ioError(self, IOErrorEvent.IO_ERROR, `Audio Error: ${self._url}`);
                 }
                 else {
                     AudioAPIDecode.addDecode({
@@ -42,15 +42,15 @@ namespace dou.impl {
                 }
             });
             request.addEventListener("error", function () {
-                IOErrorEvent.dispatch(self, IOErrorEvent.IO_ERROR, `Audio Error: ${self._url}`);
+                dispatcher.ioError(self, IOErrorEvent.IO_ERROR, `Audio Error: ${self._url}`);
             });
             request.send();
             function onAudioLoaded(): void {
                 self._loaded = true;
-                self.dispatch(Event.COMPLETE);
+                dispatcher.event(self, Event.COMPLETE);
             }
             function onAudioError(): void {
-                IOErrorEvent.dispatch(self, IOErrorEvent.IO_ERROR, `Audio Error: ${self._url}`);
+                dispatcher.ioError(self, IOErrorEvent.IO_ERROR, `Audio Error: ${self._url}`);
             }
         }
 

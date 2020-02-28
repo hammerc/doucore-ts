@@ -84,14 +84,6 @@ namespace dou {
             return !event.$isDefaultPrevented();
         }
 
-        public dispatch(type: string, data?: any, cancelable?: boolean): boolean {
-            let event = recyclable(Event);
-            event.init(type, data, cancelable);
-            let result = this.dispatchEvent(event);
-            event.recycle();
-            return result;
-        }
-
         public off(type: string, listener: Function, thisObj?: any): void {
             let map = this._eventMap;
             if (map.hasOwnProperty(type)) {

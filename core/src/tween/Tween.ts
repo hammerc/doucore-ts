@@ -347,7 +347,7 @@ namespace dou {
                     }
                 }
             }
-            this.dispatch(Event.CHANGE);
+            dispatcher.event(this, Event.CHANGE);
             return end;
         }
 

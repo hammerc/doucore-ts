@@ -56,10 +56,6 @@ namespace dou {
             return this._impl.dispatchEvent(event);
         }
 
-        public dispatch(type: string, data?: any, cancelable?: boolean): boolean {
-            return this._impl.dispatch(type, data, cancelable);
-        }
-
         public off(type: string, listener: Function, thisObj?: any): void {
             this._impl.off(type, listener, thisObj);
         }

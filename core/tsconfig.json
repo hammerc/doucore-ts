@@ -93,7 +93,6 @@
     "src/net/HttpResponseType.ts",
     "src/net/HttpRequest.ts",
     "src/net/ImageLoader.ts",
-    "src/net/SoundLoader.ts",
     "src/net/Socket.ts",
 
     "src/tween/Ease.ts",

@@ -28,7 +28,7 @@ namespace dou.impl {
         private _onPlayEnd = () => {
             if (this.loops == 1) {
                 this.stop();
-                this.dispatch(Event.SOUND_COMPLETE);
+                dispatcher.event(this, Event.SOUND_COMPLETE);
                 return;
             }
             if (this.loops > 0) {

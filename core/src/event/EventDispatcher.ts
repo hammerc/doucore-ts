@@ -5,9 +5,11 @@ namespace dou {
      */
     export class EventDispatcher implements IEventDispatcher {
         private _eventMap: { [type: string]: Recyclable<EventBin>[] };
+        private _target: any;
 
-        public constructor() {
+        public constructor(target?: any) {
             this._eventMap = {};
+            this._target = target;
         }
 
         public on(type: string, listener: Function, thisObj?: any): void {
@@ -51,7 +53,7 @@ namespace dou {
             if (list.length == 0) {
                 return true;
             }
-            event.$setTarget(this);
+            event.$setTarget(this._target || this);
             let currentIndex = 0;
             for (var i = 0, len = list.length; i < len; i++) {
                 let bin = list[i];

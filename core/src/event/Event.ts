@@ -7,6 +7,7 @@ namespace dou {
         public static OPEN: string = "open";
         public static CHANGE: string = "change";
         public static COMPLETE: string = "complete";
+        public static SOUND_COMPLETE: string = "soundComplete";
         public static MESSAGE: string = "message";
         public static CLOSE: string = "close";
 

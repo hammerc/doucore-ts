@@ -86,10 +86,10 @@ namespace dou {
                 let ioError = (xhr.status >= 400 || xhr.status == 0);
                 setTimeout(() => {
                     if (ioError) {
-                        dispatcher.ioError(this, IOErrorEvent.IO_ERROR, `Request Error: ${this._url}`);
+                        this.dispatchIOErrorEvent(IOErrorEvent.IO_ERROR, `Request Error: ${this._url}`);
                     }
                     else {
-                        dispatcher.event(this, Event.COMPLETE);
+                        this.dispatchEvent(Event.COMPLETE);
                     }
                 }, 0);
             }
@@ -97,7 +97,7 @@ namespace dou {
 
         private updateProgress(event?: any): void {
             if (event.lengthComputable) {
-                dispatcher.progress(this, ProgressEvent.PROGRESS, event.loaded, event.total);
+                this.dispatchProgressEvent(ProgressEvent.PROGRESS, event.loaded, event.total);
             }
         }
 

@@ -93,7 +93,7 @@ namespace dou {
 
         private onOpen(event: globalEvent): void {
             this._connected = true;
-            dispatcher.event(this, Event.OPEN);
+            this.dispatchEvent(Event.OPEN);
         }
 
         private onMessage(messageEvent: MessageEvent): void {
@@ -102,7 +102,7 @@ namespace dou {
             }
             let data = messageEvent.data;
             if (!this._cacheInput && data) {
-                dispatcher.event(this, Event.MESSAGE, data);
+                this.dispatchEvent(Event.MESSAGE, data);
                 return;
             }
             if (this._input.length > 0 && this._input.bytesAvailable < 1) {
@@ -123,16 +123,16 @@ namespace dou {
                 this._addInputPosition = this._input.position;
                 this._input.position = pre;
             }
-            dispatcher.event(this, Event.MESSAGE, data);
+            this.dispatchEvent(Event.MESSAGE, data);
         }
 
         private onClose(event: CloseEvent): void {
             this._connected = false;
-            dispatcher.event(this, Event.CLOSE);
+            this.dispatchEvent(Event.CLOSE);
         }
 
         private onError(event: globalEvent): void {
-            dispatcher.ioError(this, IOErrorEvent.IO_ERROR, `Socket connect error: ${this._url}`);
+            this.dispatchIOErrorEvent(IOErrorEvent.IO_ERROR, `Socket connect error: ${this._url}`);
         }
 
         public send(data: string | ArrayBuffer): void {
@@ -152,7 +152,7 @@ namespace dou {
                 this._output.endian = this.endian;
                 this._output.clear();
                 if (error) {
-                    dispatcher.ioError(this, IOErrorEvent.IO_ERROR, `Socket connect error: ${this._url}`);
+                    this.dispatchIOErrorEvent(IOErrorEvent.IO_ERROR, `Socket connect error: ${this._url}`);
                 }
             }
         }

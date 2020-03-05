@@ -1,15 +1,26 @@
-namespace dispatcher {
-    /**
-     * 抛出 IO 错误事件
-     */
-    export function ioError(target: dou.IEventDispatcher, type: string, msg: string, cancelable?: boolean): boolean {
-        let event = dou.recyclable(dou.IOErrorEvent);
-        event.$initIOErrorEvent(type, msg, cancelable);
-        let result = target.dispatchEvent(event);
-        event.recycle();
-        return result;
+declare module dou {
+    interface EventDispatcher {
+        /**
+         * 抛出 IO 错误事件
+         */
+        dispatchIOErrorEvent(type: string, msg: string, cancelable?: boolean): boolean;
     }
 }
+
+(function () {
+    Object.defineProperties(dou.EventDispatcher, {
+        dispatchIOErrorEvent: {
+            value: function (type: string, msg: string, cancelable?: boolean): boolean {
+                let event = dou.recyclable(dou.IOErrorEvent);
+                event.$initIOErrorEvent(type, msg, cancelable);
+                let result = this.dispatch(event);
+                event.recycle();
+                return result;
+            },
+            enumerable: false
+        }
+    });
+})();
 
 namespace dou {
     /**

@@ -1,15 +1,26 @@
-namespace dispatcher {
-    /**
-     * 抛出事件
-     */
-    export function event(target: dou.IEventDispatcher, type: string, data?: any, cancelable?: boolean): boolean {
-        let event = dou.recyclable(dou.Event);
-        event.$initEvent(type, data, cancelable);
-        let result = target.dispatchEvent(event);
-        event.recycle();
-        return result;
+declare module dou {
+    interface EventDispatcher {
+        /**
+         * 抛出事件
+         */
+        dispatchEvent(type: string, data?: any, cancelable?: boolean): boolean;
     }
 }
+
+(function () {
+    Object.defineProperties(dou.EventDispatcher, {
+        dispatchEvent: {
+            value: function (type: string, data?: any, cancelable?: boolean): boolean {
+                let event = dou.recyclable(dou.Event);
+                event.$initEvent(type, data, cancelable);
+                let result = this.dispatch(event);
+                event.recycle();
+                return result;
+            },
+            enumerable: false
+        }
+    });
+})();
 
 namespace dou {
     /**

@@ -44,7 +44,7 @@ namespace dou {
             return this._eventMap.hasOwnProperty(type) && this._eventMap[type].length > 0;
         }
 
-        public dispatchEvent(event: Event): boolean {
+        public dispatch(event: Event): boolean {
             let map = this._eventMap;
             if (!map.hasOwnProperty(event.type)) {
                 return true;

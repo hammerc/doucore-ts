@@ -52,8 +52,8 @@ namespace dou {
             return this._impl.has(type);
         }
 
-        public dispatchEvent(event: Event): boolean {
-            return this._impl.dispatchEvent(event);
+        public dispatch(event: Event): boolean {
+            return this._impl.dispatch(event);
         }
 
         public off(type: string, listener: Function, thisObj?: any): void {

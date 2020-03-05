@@ -74,11 +74,11 @@ namespace dou.impl {
                     audio.muted = false;
                 }
                 self._loaded = true;
-                dispatcher.event(self, Event.COMPLETE);
+                self.dispatchEvent(Event.COMPLETE);
             }
             function onAudioError(): void {
                 removeListeners();
-                dispatcher.ioError(self, IOErrorEvent.IO_ERROR, `Audio Error: ${self._url}`);
+                self.dispatchIOErrorEvent(IOErrorEvent.IO_ERROR, `Audio Error: ${self._url}`);
             }
             function removeListeners(): void {
                 audio.removeEventListener("canplaythrough", onAudioLoaded);

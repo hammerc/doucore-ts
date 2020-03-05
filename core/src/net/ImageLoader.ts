@@ -58,7 +58,7 @@ namespace dou {
             let image = this.getImage(<any>event.target);
             if (image) {
                 setTimeout(() => {
-                    dispatcher.event(this, Event.COMPLETE);
+                    this.dispatchEvent(Event.COMPLETE);
                 }, 0);
             }
         }
@@ -67,7 +67,7 @@ namespace dou {
             let image = this.getImage(<any>event.target);
             if (image) {
                 setTimeout(() => {
-                    dispatcher.ioError(this, IOErrorEvent.IO_ERROR, `Image load error: ${image.src}`);
+                    this.dispatchIOErrorEvent(IOErrorEvent.IO_ERROR, `Image load error: ${image.src}`);
                 }, 0);
             }
         }

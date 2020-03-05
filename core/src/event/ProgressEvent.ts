@@ -1,15 +1,26 @@
-namespace dispatcher {
-    /**
-     * 抛出进度事件
-     */
-    export function progress(target: dou.IEventDispatcher, type: string, loaded: number, total: number, cancelable?: boolean): boolean {
-        let event = dou.recyclable(dou.ProgressEvent);
-        event.$initProgressEvent(type, loaded, total, cancelable);
-        let result = target.dispatchEvent(event);
-        event.recycle();
-        return result;
+declare module dou {
+    interface EventDispatcher {
+        /**
+         * 抛出进度事件
+         */
+        dispatchProgressEvent(type: string, loaded: number, total: number, cancelable?: boolean): boolean;
     }
 }
+
+(function () {
+    Object.defineProperties(dou.EventDispatcher, {
+        dispatchProgressEvent: {
+            value: function (type: string, loaded: number, total: number, cancelable?: boolean): boolean {
+                let event = dou.recyclable(dou.ProgressEvent);
+                event.$initProgressEvent(type, loaded, total, cancelable);
+                let result = this.dispatch(event);
+                event.recycle();
+                return result;
+            },
+            enumerable: false
+        }
+    });
+})();
 
 namespace dou {
     /**

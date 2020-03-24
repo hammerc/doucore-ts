@@ -8,7 +8,7 @@ declare module dou {
 }
 
 (function () {
-    Object.defineProperties(dou.EventDispatcher, {
+    Object.defineProperties(dou.EventDispatcher.prototype, {
         dispatchIOErrorEvent: {
             value: function (type: string, msg: string, cancelable?: boolean): boolean {
                 let event = dou.recyclable(dou.IOErrorEvent);

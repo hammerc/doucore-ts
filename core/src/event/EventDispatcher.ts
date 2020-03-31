@@ -45,6 +45,11 @@ namespace dou {
         }
 
         public dispatch(event: Event): boolean {
+            event.$setTarget(this._eventTarget || this);
+            return this.$notify(event);
+        }
+
+        public $notify(event: Event): boolean {
             let map = this._eventMap;
             if (!map.hasOwnProperty(event.type)) {
                 return true;
@@ -53,7 +58,6 @@ namespace dou {
             if (list.length == 0) {
                 return true;
             }
-            event.$setTarget(this._eventTarget || this);
             let currentIndex = 0;
             for (var i = 0, len = list.length; i < len; i++) {
                 let bin = list[i];

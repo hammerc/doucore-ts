@@ -174,7 +174,7 @@ namespace dou {
 
         public loadAsync(url: string, type?: string, priority: number = 0, cache: boolean = true): Promise<any> {
             return new Promise<any>((resolve: (value?: any) => void, reject: (reason?: any) => void) => {
-                this.load(url, (url, data) => {
+                this.load(url, (data, url) => {
                     if (data) {
                         resolve(data);
                     }
@@ -188,11 +188,11 @@ namespace dou {
         /**
          * 加载多个指定项
          */
-        public loadGroup(items: { url: string, type?: string, priority?: number, cache?: boolean }[], callback?: (current: number, total: number, url: string, data: any) => void, thisObj?: any): void {
+        public loadGroup(items: { url: string, type?: string, priority?: number, cache?: boolean }[], callback?: (current: number, total: number, data: any, url: string) => void, thisObj?: any): void {
             let current = 0, total = items.length;
-            let itemCallback = (url: string, data: any) => {
+            let itemCallback = (data: any, url: string) => {
                 current++;
-                callback.call(thisObj, current, total, url, data);
+                callback.call(thisObj, current, total, data, url);
             };
             for (let item of items) {
                 this.load(item.url, itemCallback, this, item.type, item.priority, item.cache);
@@ -201,7 +201,7 @@ namespace dou {
 
         public loadGroupAsync(items: { url: string, type?: string, priority?: number, cache?: boolean }[]): Promise<void> {
             return new Promise<any>((resolve: (value?: any) => void, reject: (reason?: any) => void) => {
-                this.loadGroup(items, (current, total, url, data) => {
+                this.loadGroup(items, (current, total, data, url) => {
                     if (current == total) {
                         resolve();
                     }

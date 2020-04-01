@@ -91,7 +91,7 @@ namespace dou {
         public off(type: string, listener: Function, thisObj?: any): void {
             let map = this._eventMap;
             if (map.hasOwnProperty(type)) {
-                let list = map[event.type];
+                let list = map[type];
                 for (let i = 0, len = list.length; i < len; i++) {
                     let info = list[i];
                     if (info && info.listener == listener && info.thisObj == thisObj) {

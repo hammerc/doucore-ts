@@ -107,5 +107,6 @@
     "src/utils/HttpUtil.ts",
     "src/utils/ScriptUtil.ts",
     "src/utils/BitUtil.ts",
+    "src/utils/StringUtil.ts",
   ]
 }

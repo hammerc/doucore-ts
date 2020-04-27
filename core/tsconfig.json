@@ -108,5 +108,7 @@
     "src/utils/ScriptUtil.ts",
     "src/utils/BitUtil.ts",
     "src/utils/StringUtil.ts",
+    "src/utils/superGetter.ts",
+    "src/utils/superSetter.ts",
   ]
 }

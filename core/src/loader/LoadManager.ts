@@ -17,6 +17,8 @@ namespace dou {
         private _analyzerMap: { [key: string]: IAnalyzer };
         private _extensionMap: { [key: string]: string };
 
+        private _pathController: IPathController;
+
         private _priorityList: number[];
         private _priorityMap: { [priority: number]: ResourceItem[] };
         private _keyMap: { [key: string]: ResourceItem[] };
@@ -77,9 +79,19 @@ namespace dou {
         }
 
         /**
+         * 注册实际地址控制器
+         */
+        public registerPathController(controller: IPathController): void {
+            this._pathController = controller;
+        }
+
+        /**
          * 加载指定项
          */
         public load(url: string, callback?: (data: any, url: string) => void, thisObj?: any, type?: string, priority: number = 0, cache: boolean = true): void {
+            if (this._pathController) {
+                url = this._pathController.getVirtualUrl(url);
+            }
             if (this.isLoaded(url)) {
                 callback.call(thisObj, this.get(url), url);
                 return;
@@ -213,6 +225,9 @@ namespace dou {
          * 资源是否已经加载并缓存
          */
         public isLoaded(url: string): boolean {
+            if (this._pathController) {
+                url = this._pathController.getVirtualUrl(url);
+            }
             return this._cacheDataMap.hasOwnProperty(url);
         }
 
@@ -220,6 +235,9 @@ namespace dou {
          * 获取已经加载并缓存的资源
          */
         public get(url: string): any {
+            if (this._pathController) {
+                url = this._pathController.getVirtualUrl(url);
+            }
             return this._cacheDataMap[url];
         }
 
@@ -227,6 +245,9 @@ namespace dou {
          * 释放已经加载并缓存的资源
          */
         public release(url: string): boolean {
+            if (this._pathController) {
+                url = this._pathController.getVirtualUrl(url);
+            }
             if (this.isLoaded(url)) {
                 let type = this._cacheTypeMap[url];
                 let analyzer = this._analyzerMap[type];

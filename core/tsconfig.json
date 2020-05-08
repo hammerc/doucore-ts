@@ -78,6 +78,7 @@
     "src/loader/analyzer/JsonAnalyzer.ts",
     "src/loader/analyzer/BytesAnalyzer.ts",
     "src/loader/analyzer/SoundAnalyzer.ts",
+    "src/loader/path/IPathController.ts",
     "src/loader/LoadManager.ts",
 
     "src/media/impl/AudioSound.ts",

@@ -45,7 +45,9 @@ namespace dou.impl {
 
         public set volume(value: number) {
             if (this._isStopped) {
-                console.error("Sound has stopped, please recall Sound.play () to play the sound.");
+                if (DEBUG) {
+                    console.warn(`音乐已经停止, 请重新调用 play 方法播放`);
+                }
                 return;
             }
             this._volume = value;
@@ -67,7 +69,9 @@ namespace dou.impl {
 
         public play(): void {
             if (this._isStopped) {
-                console.error("Sound has stopped, please recall Sound.play () to play the sound.");
+                if (DEBUG) {
+                    console.warn(`音乐已经停止, 请重新调用 play 方法播放`);
+                }
                 return;
             }
             try {

@@ -17,7 +17,10 @@ namespace dou.impl {
             if (this._audioBuffer) {
                 return this._audioBuffer.duration;
             }
-            throw new Error("sound not loaded!");
+            if (DEBUG) {
+                console.warn(`音频未加载`);
+            }
+            return -1;
         }
 
         public load(url: string): void {
@@ -56,7 +59,9 @@ namespace dou.impl {
 
         public play(startTime?: number, loops?: number): AudioAPISoundChannel {
             if (!this._loaded) {
-                console.error("In the absence of sound is not allowed to play after loading.");
+                if (DEBUG) {
+                    console.warn(`音频需要加载完成后才能播放`);
+                }
                 return;
             }
             let channel = new AudioAPISoundChannel();

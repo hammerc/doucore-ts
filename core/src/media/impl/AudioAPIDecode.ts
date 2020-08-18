@@ -37,7 +37,9 @@ namespace dou.impl {
                 _decoding = false;
                 decode();
             }, () => {
-                console.warn("Sound decode error.");
+                if (DEBUG) {
+                    console.warn(`音频解码错误`);
+                }
                 if (decodeInfo.fail) {
                     decodeInfo.fail();
                 }

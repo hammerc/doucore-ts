@@ -14,7 +14,7 @@ gulp.task("ts", function () {
 
 gulp.task("uglify", function () {
   return gulp.src("bin/dou.js")
-    .pipe(uglify())
+    .pipe(uglify({ compress: { global_defs: { DEBUG: false, RELEASE: true } } }))
     .pipe(rename({ basename: "dou.min" }))
     .pipe(gulp.dest("bin"));
 });

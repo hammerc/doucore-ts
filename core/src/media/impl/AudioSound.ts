@@ -47,7 +47,10 @@ namespace dou.impl {
             if (this._originAudio) {
                 return this._originAudio.duration;
             }
-            throw new Error("Sound not loaded.");
+            if (DEBUG) {
+                console.warn(`音频未加载`);
+            }
+            return -1;
         }
 
         public load(url: string): void {
@@ -88,7 +91,9 @@ namespace dou.impl {
 
         public play(startTime?: number, loops?: number): AudioSoundChannel {
             if (!this._loaded) {
-                console.error("In the absence of sound is not allowed to play after loading.");
+                if (DEBUG) {
+                    console.warn(`音频需要加载完成后才能播放`);
+                }
                 return;
             }
             let audio = AudioSound.pop(this._url);

@@ -26,6 +26,11 @@ namespace dou {
             if (typeof (<any>obj).onRecycle === "function") {
                 (<any>obj).onRecycle();
             }
+            if (DEBUG) {
+                if (this._list.length >= this._maxCount) {
+                    console.warn(`类型"${obj.constructor}"的对象池已满, 最大数量为"${this._maxCount}"`);
+                }
+            }
             if (this._list.length < this._maxCount) {
                 if (!this._map.has(obj)) {
                     this._map.set(obj, true);

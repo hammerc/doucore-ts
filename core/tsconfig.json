@@ -61,6 +61,8 @@
   },
   /* 注: 如果有继承关系的, 父类必须排在子类前面 */
   "files": [
+    "lib/compile.d.ts",
+
     "src/extends/Extend.ts",
 
     "src/core/defined.ts",

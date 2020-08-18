@@ -26,6 +26,15 @@ namespace dou {
     /**
      * 对象池配置
      */
+    export function DeployPool(maxCount: number) {
+        return function (constructor: Function) {
+            (<any>constructor).__cacheMaxCount = maxCount;
+        };
+    }
+
+    /**
+     * 对象池配置
+     */
     export function deployPool(creator: Creator<any> & { __pool?: ObjectPool<any> }, maxCount: number): void {
         (<any>creator.prototype.constructor).__cacheMaxCount = maxCount;
     }

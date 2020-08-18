@@ -100,7 +100,7 @@ namespace dou {
                 type = this.getDefaultType(url);
             }
             if (!this._analyzerMap[type]) {
-                console.error(`Can not find resource type: "${type}"`);
+                console.error(`找不到资源类型: "${type}"`);
                 return;
             }
             let item: ResourceItem = { url, type, priority, cache, callback, thisObj };

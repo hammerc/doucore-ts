@@ -149,9 +149,7 @@ namespace dou {
             if (bl > 0 && this._position + len <= bl) {
                 return true;
             }
-            else {
-                console.error("End of the file");
-            }
+            throw new Error(`遇到文件尾`);
         }
 
         protected validateBuffer2(len: number): void {
@@ -231,15 +229,13 @@ namespace dou {
             let pos = this._position;
             let available = this._writePosition - pos;
             if (available < 0) {
-                console.error("End of the file");
-                return;
+                throw new Error(`遇到文件尾`);
             }
             if (length == 0) {
                 length = available;
             }
             else if (length > available) {
-                console.error("End of the file");
-                return;
+                throw new Error(`遇到文件尾`);
             }
             const position = bytes._position;
             bytes._position = 0;
@@ -368,7 +364,7 @@ namespace dou {
 
         private decoderError(fatal: boolean, opt_code_point?: number): number {
             if (fatal) {
-                console.error("Decoding error");
+                console.error(`解码错误`);
             }
             return opt_code_point || 0xFFFD;
         }
@@ -460,7 +456,7 @@ namespace dou {
             while (codePoints.length > pos) {
                 let code_point = codePoints[pos++];
                 if (this.inRange(code_point, 0xD800, 0xDFFF)) {
-                    console.error(`EncodingError The code point ${code_point} could not be encoded`);
+                    console.error(`编码错误, "${code_point}"不能被编码`);
                 }
                 else if (this.inRange(code_point, 0x0000, 0x007f)) {
                     outputBytes.push(code_point);

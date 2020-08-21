@@ -1069,4 +1069,3 @@ declare namespace Dou {
      */
     function superSetter(currentClass: any, thisObj: any, type: string, ...values: any[]): any;
 }
-declare var Dou: any;

@@ -1,4 +1,3 @@
-var Dou;
 (function (Dou) {
 
     Dou.TickerBase = dou.TickerBase;
@@ -23,7 +22,9 @@ var Dou;
     Dou.impl.AudioSoundChannel = dou.impl.AudioSoundChannel;
     Dou.Sound = dou.Sound;
 
+    Dou.HttpMethod = dou.HttpMethod;
     Dou.HttpRequest = dou.HttpRequest;
+    Dou.HttpResponseType = dou.HttpResponseType;
     Dou.ImageLoader = dou.ImageLoader;
     Dou.Socket = dou.Socket;
 
@@ -45,4 +46,4 @@ var Dou;
     Dou.superGetter = dou.superGetter;
     Dou.superSetter = dou.superSetter;
 
-})(Dou || (Dou = {}));
+})((<any>window).Dou || ((<any>window).Dou = {}));

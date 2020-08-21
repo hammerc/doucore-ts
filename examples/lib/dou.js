@@ -3129,7 +3129,6 @@ var dou;
     }
     dou.superSetter = superSetter;
 })(dou || (dou = {}));
-var Dou;
 (function (Dou) {
     Dou.TickerBase = dou.TickerBase;
     Dou.Event = dou.Event;
@@ -3149,7 +3148,9 @@ var Dou;
     Dou.impl.AudioSound = dou.impl.AudioSound;
     Dou.impl.AudioSoundChannel = dou.impl.AudioSoundChannel;
     Dou.Sound = dou.Sound;
+    Dou.HttpMethod = dou.HttpMethod;
     Dou.HttpRequest = dou.HttpRequest;
+    Dou.HttpResponseType = dou.HttpResponseType;
     Dou.ImageLoader = dou.ImageLoader;
     Dou.Socket = dou.Socket;
     Dou.Ease = dou.Ease;
@@ -3168,4 +3169,4 @@ var Dou;
     Dou.StringUtil = dou.StringUtil;
     Dou.superGetter = dou.superGetter;
     Dou.superSetter = dou.superSetter;
-})(Dou || (Dou = {}));
+})(window.Dou || (window.Dou = {}));

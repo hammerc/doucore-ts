@@ -2,7 +2,8 @@ var gulp = require("gulp");
 var rename = require("gulp-rename");
 var ts = require("gulp-typescript");
 var uglify = require("gulp-uglify-es").default;
-var del = require('del');
+var del = require("del");
+var fs = require("fs");
 
 gulp.task("ts", function () {
   var tsProject = ts.createProject("tsconfig.json");
@@ -10,6 +11,14 @@ gulp.task("ts", function () {
   return tsProject.src()
     .pipe(tsProject())
     .pipe(gulp.dest("bin"));
+});
+
+gulp.task("Dou", function (cb) {
+  let content = fs.readFileSync("bin/dou.d.ts", { encoding: "utf8" });
+  content = content.replace(/declare\s+namespace\s+dou([\.a-zA-Z0-9$_]*)\s\{/g, "declare namespace Dou$1 {");
+  content = content.replace(/declare\s+module\s+dou([\.a-zA-Z0-9$_]*)\s\{/g, "declare module Dou$1 {");
+  fs.writeFileSync("bin/Dou.core.d.ts", content, { encoding: "utf8" });
+  cb();
 });
 
 gulp.task("uglify", function () {
@@ -28,4 +37,4 @@ gulp.task("copy", function () {
     .pipe(gulp.dest("../../dou3d-ts/examples/lib"));
 });
 
-gulp.task("default", gulp.series("ts", "uglify", "copy"));
+gulp.task("default", gulp.series("ts", "Dou", "uglify", "copy"));

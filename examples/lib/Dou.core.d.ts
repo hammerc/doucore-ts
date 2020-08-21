@@ -59,7 +59,7 @@ interface Date {
     format(template: string): string;
 }
 declare type globalEvent = Event;
-declare namespace dou {
+declare namespace Dou {
     /**
      * 心跳计时器基类
      * 请使用 requestAnimationFrame 来调用 update 方法, 或者保证每 1/60 秒调用 update 方法 1 次
@@ -100,7 +100,7 @@ declare namespace dou {
         protected abstract updateLogic(passedTime: number): void;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 事件发送器接口
      * @author wizardc
@@ -113,7 +113,7 @@ declare namespace dou {
         off(type: string, listener: Function, thisObj?: any): void;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 事件发送器
      * @author wizardc
@@ -131,7 +131,7 @@ declare namespace dou {
         off(type: string, listener: Function, thisObj?: any): void;
     }
 }
-declare module dou {
+declare module Dou {
     interface EventDispatcher {
         /**
          * 抛出事件
@@ -139,7 +139,7 @@ declare module dou {
         dispatchEvent(type: string, data?: any, cancelable?: boolean): boolean;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 事件类
      * @author wizardc
@@ -170,7 +170,7 @@ declare namespace dou {
         onRecycle(): void;
     }
 }
-declare module dou {
+declare module Dou {
     interface EventDispatcher {
         /**
          * 抛出 IO 错误事件
@@ -178,7 +178,7 @@ declare module dou {
         dispatchIOErrorEvent(type: string, msg: string, cancelable?: boolean): boolean;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * IO 错误事件类
      * @author wizardc
@@ -191,7 +191,7 @@ declare namespace dou {
         onRecycle(): void;
     }
 }
-declare module dou {
+declare module Dou {
     interface EventDispatcher {
         /**
          * 抛出进度事件
@@ -199,7 +199,7 @@ declare module dou {
         dispatchProgressEvent(type: string, loaded: number, total: number, cancelable?: boolean): boolean;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 进度事件类
      * @author wizardc
@@ -214,7 +214,7 @@ declare namespace dou {
         onRecycle(): void;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 资源加载解析器接口
      * @author wizardc
@@ -224,7 +224,7 @@ declare namespace dou {
         release(data: any): boolean;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * HTTP 请求加载器基类
      * @author wizardc
@@ -236,7 +236,7 @@ declare namespace dou {
         release(data: any): boolean;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 文本加载器
      * @author wizardc
@@ -246,7 +246,7 @@ declare namespace dou {
         protected dataAnalyze(data: any): any;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * JSON 加载器
      * @author wizardc
@@ -256,7 +256,7 @@ declare namespace dou {
         protected dataAnalyze(data: any): any;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 二进制加载器
      * @author wizardc
@@ -266,7 +266,7 @@ declare namespace dou {
         protected dataAnalyze(data: any): any;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 声音加载器
      * @author wizardc
@@ -276,7 +276,7 @@ declare namespace dou {
         release(data: Sound): boolean;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 实际地址控制器
      * @author wizardc
@@ -288,7 +288,7 @@ declare namespace dou {
         getVirtualUrl(url: string): string;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 加载管理器
      * @author wizardc
@@ -372,7 +372,7 @@ declare namespace dou {
      */
     const loader: LoadManager;
 }
-declare namespace dou.impl {
+declare namespace Dou.impl {
     /**
      * 声音
      * * Audio 标签实现
@@ -394,7 +394,7 @@ declare namespace dou.impl {
         close(): void;
     }
 }
-declare namespace dou.impl {
+declare namespace Dou.impl {
     /**
      * 声音通道
      * * Audio 标签实现
@@ -417,7 +417,7 @@ declare namespace dou.impl {
         stop(): void;
     }
 }
-declare namespace dou.impl {
+declare namespace Dou.impl {
     /**
      * AudioContext 解码器
      * @author wizardc
@@ -434,7 +434,7 @@ declare namespace dou.impl {
         function decode(): void;
     }
 }
-declare namespace dou.impl {
+declare namespace Dou.impl {
     /**
      * 声音
      * * Audio API 实现
@@ -451,7 +451,7 @@ declare namespace dou.impl {
         close(): void;
     }
 }
-declare namespace dou.impl {
+declare namespace Dou.impl {
     /**
      * 声音通道
      * * Audio API 实现
@@ -477,7 +477,7 @@ declare namespace dou.impl {
         stop(): void;
     }
 }
-declare namespace dou.impl {
+declare namespace Dou.impl {
     /**
      * 声音接口
      * @author wizardc
@@ -492,7 +492,7 @@ declare namespace dou.impl {
         new (target: any): ISound;
     };
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 声音
      * @author wizardc
@@ -525,7 +525,7 @@ declare namespace dou {
         off(type: string, listener: Function, thisObj?: any): void;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 声音通道
      * @author wizardc
@@ -545,7 +545,7 @@ declare namespace dou {
         stop(): void;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * HTTP 请求方法
      * @author wizardc
@@ -555,7 +555,7 @@ declare namespace dou {
         POST = 1
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * HTTP 返回值类型
      * @author wizardc
@@ -568,7 +568,7 @@ declare namespace dou {
         text = 5
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * HTTP 请求类
      * @author wizardc
@@ -598,7 +598,7 @@ declare namespace dou {
         abort(): void;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 图片加载器
      * @author wizardc
@@ -623,7 +623,7 @@ declare namespace dou {
         private onError;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 套接字对象
      * @author wizardc
@@ -661,7 +661,7 @@ declare namespace dou {
         private cleanSocket;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 缓动函数集合
      * @author wizardc
@@ -696,7 +696,7 @@ declare namespace dou {
         const elasticInOut: (t: number) => number;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 缓动类
      * @author wizardc
@@ -827,13 +827,13 @@ declare namespace dou {
         private _set;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 获取引擎启动之后经过的毫秒数
      */
     function getTimer(): number;
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 通过对象池进行缓存的对象类型
      * @author wizardc
@@ -849,7 +849,7 @@ declare namespace dou {
         onReuse?(): void;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     type Creator<T> = {
         new (): T;
     };
@@ -869,7 +869,7 @@ declare namespace dou {
         clear(): void;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     type Recyclable<T> = T & {
         recycle(): void;
     };
@@ -902,7 +902,7 @@ declare namespace dou {
         __pool?: ObjectPool<any>;
     }): void;
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 字节顺序
      * @author wizardc
@@ -912,7 +912,7 @@ declare namespace dou {
         bigEndian = 1
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 字节数组
      * @author wizardc
@@ -979,7 +979,7 @@ declare namespace dou {
         toString(): string;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * HTTP 请求工具类
      * @author wizardc
@@ -990,7 +990,7 @@ declare namespace dou {
         function post(url: string, data?: any, callback?: (response: any) => void, thisObj?: any, errorCallback?: (status: number) => void, errorThisObj?: any): void;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 脚本工具类
      * @author wizardc
@@ -1010,7 +1010,7 @@ declare namespace dou {
         function loadJS(url: string, cross?: boolean, callback?: Function, thisObj?: any, ...args: any[]): void;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 位运算工具类
      * @author wizardc
@@ -1033,7 +1033,7 @@ declare namespace dou {
         function switchBit32(target: number, position: number): number;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 字符串工具类
      * @author wizardc
@@ -1049,7 +1049,7 @@ declare namespace dou {
         function isAllWhitespace(str: string): boolean;
     }
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 调用父类 getter 方法, 类似其他语言的 xxx = super.getter; 这样的写法
      * @param currentClass 当前的类
@@ -1059,7 +1059,7 @@ declare namespace dou {
      */
     function superGetter(currentClass: any, thisObj: any, type: string): any;
 }
-declare namespace dou {
+declare namespace Dou {
     /**
      * 调用父类 setter 方法, 类似其他语言的 super.setter = xxx; 这样的写法
      * @param currentClass 当前的类

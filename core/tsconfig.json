@@ -59,10 +59,11 @@
     "experimentalDecorators": true,           /* Enables experimental support for ES7 decorators. */
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
   },
+  "include": [
+    "lib"
+  ],
   /* 注: 如果有继承关系的, 父类必须排在子类前面 */
   "files": [
-    "lib/compile.d.ts",
-
     "src/extends/Extend.ts",
 
     "src/core/defined.ts",
@@ -113,5 +114,7 @@
     "src/utils/StringUtil.ts",
     "src/utils/superGetter.ts",
     "src/utils/superSetter.ts",
+
+    "src/Dou.ts",
   ]
 }

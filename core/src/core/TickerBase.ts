@@ -13,6 +13,8 @@ namespace dou {
         protected _frameCount: number;
         protected _lastCount: number;
 
+        protected _immediateUpdate: boolean = false;
+
         protected _lastTimeStamp: number = 0;
 
         protected _paused: boolean = false;
@@ -56,6 +58,13 @@ namespace dou {
         }
 
         /**
+         * 请求立即刷新
+         */
+        public requestImmediateUpdate(): void {
+            this._immediateUpdate = true;
+        }
+
+        /**
          * 暂停计时器
          */
         public pause(): void {
@@ -76,9 +85,15 @@ namespace dou {
             if (this._paused) {
                 return;
             }
+            let immediateUpdate = this._immediateUpdate;
+            this._immediateUpdate = false;
+            let frameComplete = false;
             this._lastCount++;
             if (this._lastCount >= this._frameCount) {
                 this._lastCount = 0;
+                frameComplete = true;
+            }
+            if (immediateUpdate || frameComplete) {
                 let now = getTimer();
                 let interval = now - this._lastTimeStamp;
                 this._lastTimeStamp = now;

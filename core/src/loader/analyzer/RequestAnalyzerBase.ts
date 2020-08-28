@@ -21,7 +21,7 @@ namespace dou {
             request.send();
         }
 
-        public release(data: any): boolean {
+        public release(url: string, data: any): boolean {
             return true;
         }
     }

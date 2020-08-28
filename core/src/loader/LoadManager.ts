@@ -255,7 +255,7 @@ namespace dou {
                     return false;
                 }
                 let data = this._cacheDataMap[url];
-                let success = analyzer.release(data);
+                let success = analyzer.release(url, data);
                 if (success) {
                     delete this._cacheTypeMap[url];
                     delete this._cacheDataMap[url];

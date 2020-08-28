@@ -5,6 +5,6 @@ namespace dou {
      */
     export interface IAnalyzer {
         load(url: string, callback: (url: string, data: any) => void, thisObj: any): void;
-        release(data: any): boolean;
+        release(url: string, data: any): boolean;
     }
 }

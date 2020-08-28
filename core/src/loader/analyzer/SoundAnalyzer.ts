@@ -15,7 +15,7 @@ namespace dou {
             sound.load(url);
         }
 
-        public release(data: Sound): boolean {
+        public release(url: string, data: Sound): boolean {
             if (data) {
                 data.close();
                 return true;

@@ -56,7 +56,7 @@ namespace dou {
         }
 
         export function sineInOut(t: number): number {
-            return -0.5 * (Math.cos(Math.PI * t) - 1)
+            return -0.5 * (Math.cos(Math.PI * t) - 1);
         }
 
         function getBackIn(amount: number): (t: number) => number {

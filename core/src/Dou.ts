@@ -1,5 +1,7 @@
 (function (Dou) {
 
+    Dou.impl = Dou.impl || {};
+
     Dou.TickerBase = dou.TickerBase;
 
     Dou.Event = dou.Event;

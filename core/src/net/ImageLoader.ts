@@ -54,7 +54,7 @@ namespace dou {
             return null;
         }
 
-        private onLoad(event: globalEvent): void {
+        private onLoad(event: globalThis.Event): void {
             let image = this.getImage(<any>event.target);
             if (image) {
                 setTimeout(() => {
@@ -63,7 +63,7 @@ namespace dou {
             }
         }
 
-        private onError(event: globalEvent): void {
+        private onError(event: globalThis.Event): void {
             let image = this.getImage(<any>event.target);
             if (image) {
                 setTimeout(() => {

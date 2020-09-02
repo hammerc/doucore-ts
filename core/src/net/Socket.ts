@@ -77,7 +77,7 @@ namespace dou {
             this._output = new ByteArray();
             this._output.endian = this.endian;
             this._addInputPosition = 0;
-            this._webSocket.onopen = (event: globalEvent) => {
+            this._webSocket.onopen = (event: globalThis.Event) => {
                 this.onOpen(event);
             };
             this._webSocket.onmessage = (messageEvent: MessageEvent) => {
@@ -86,12 +86,12 @@ namespace dou {
             this._webSocket.onclose = (event: CloseEvent) => {
                 this.onClose(event);
             };
-            this._webSocket.onerror = (event: globalEvent) => {
+            this._webSocket.onerror = (event: globalThis.Event) => {
                 this.onError(event);
             };
         }
 
-        private onOpen(event: globalEvent): void {
+        private onOpen(event: globalThis.Event): void {
             this._connected = true;
             this.dispatchEvent(Event.OPEN);
         }
@@ -131,7 +131,7 @@ namespace dou {
             this.dispatchEvent(Event.CLOSE);
         }
 
-        private onError(event: globalEvent): void {
+        private onError(event: globalThis.Event): void {
             this.dispatchIOErrorEvent(IOErrorEvent.IO_ERROR, `Socket connect error: ${this._url}`);
         }
 

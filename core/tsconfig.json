@@ -66,7 +66,6 @@
   "files": [
     "src/extends/Extend.ts",
 
-    "src/core/defined.ts",
     "src/core/TickerBase.ts",
 
     "src/event/IEventDispatcher.ts",

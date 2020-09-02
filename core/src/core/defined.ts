@@ -1,1 +1,0 @@
-type globalEvent = Event;

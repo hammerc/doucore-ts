@@ -28,7 +28,7 @@ namespace dou {
             let list = map[type];
             for (let i = 0, len = list.length; i < len; i++) {
                 let bin = list[i];
-                if (bin.listener == listener && bin.thisObj == thisObj) {
+                if (bin && bin.listener == listener && bin.thisObj == thisObj) {
                     return false;
                 }
             }
@@ -41,7 +41,16 @@ namespace dou {
         }
 
         public has(type: string): boolean {
-            return this._eventMap.hasOwnProperty(type) && this._eventMap[type].length > 0;
+            if (!this._eventMap.hasOwnProperty(type)) {
+                return false;
+            }
+            let list = this._eventMap[type];
+            if (list.length == 0) {
+                return false;
+            }
+            return list.some(v => {
+                return !!v;
+            });
         }
 
         public dispatch(event: Event): boolean {

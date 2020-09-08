@@ -93,7 +93,6 @@ namespace dou {
                 }
                 list.length = currentIndex;
             }
-            event.$setTarget(null);
             return !event.$isDefaultPrevented();
         }
 

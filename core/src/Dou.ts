@@ -35,6 +35,7 @@
 
     Dou.BitUtil = dou.BitUtil;
     Dou.ByteArray = dou.ByteArray;
+    Dou.Coroutine = dou.Coroutine;
     Dou.getTimer = dou.getTimer;
     Dou.HttpUtil = dou.HttpUtil;
     Dou.ObjectPool = dou.ObjectPool;

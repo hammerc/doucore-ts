@@ -243,6 +243,7 @@ var dou;
                 let interval = now - this._lastTimeStamp;
                 this._lastTimeStamp = now;
                 this.updateLogic(interval);
+                dou.Coroutine.$update();
             }
         }
     }
@@ -3150,6 +3151,93 @@ var dou;
     }
     dou.superSetter = superSetter;
 })(dou || (dou = {}));
+var dou;
+(function (dou) {
+    /**
+     * 协程
+     * @author wizardc
+     */
+    let Coroutine;
+    (function (Coroutine) {
+        let _coroutineID = 0;
+        let _coroutineMap = {};
+        /**
+         * 启动一个协程
+         * @returns 该协程的 id, -1 表示该协程启动即执行结束
+         */
+        function start(method, thisObj, ...args) {
+            let generator = method.call(thisObj, ...args);
+            let result = generator.next();
+            if (result.done) {
+                return -1;
+            }
+            generator.__id = _coroutineID;
+            _coroutineMap[_coroutineID] = {
+                id: _coroutineID,
+                generator,
+                removed: false
+            };
+            return _coroutineID++;
+        }
+        Coroutine.start = start;
+        /**
+         * 判断指定协程是否还在执行中
+         */
+        function exist(id) {
+            if (_coroutineMap.hasOwnProperty(id)) {
+                return !_coroutineMap[id].removed;
+            }
+            return false;
+        }
+        Coroutine.exist = exist;
+        /**
+         * 恢复协程
+         */
+        function resume(generator) {
+            let id = generator.__id;
+            if (_coroutineMap.hasOwnProperty(id)) {
+                _coroutineMap[id].removed = false;
+                return id;
+            }
+            generator.__id = _coroutineID;
+            _coroutineMap[_coroutineID] = {
+                id: _coroutineID,
+                generator,
+                removed: false
+            };
+            return _coroutineID++;
+        }
+        Coroutine.resume = resume;
+        /**
+         * 移除协程
+         */
+        function remove(id) {
+            if (!_coroutineMap.hasOwnProperty(id)) {
+                return null;
+            }
+            _coroutineMap[id].removed = true;
+            return _coroutineMap[id].generator;
+        }
+        Coroutine.remove = remove;
+        function $update() {
+            let map = _coroutineMap;
+            _coroutineMap = {};
+            for (let id in map) {
+                let info = map[id];
+                if (!info.removed) {
+                    let result = info.generator.next();
+                    if (result.done) {
+                        continue;
+                    }
+                }
+                if (!info.removed) {
+                    _coroutineMap[info.id] = info;
+                }
+            }
+        }
+        Coroutine.$update = $update;
+    })(Coroutine = dou.Coroutine || (dou.Coroutine = {}));
+})(dou || (dou = {}));
 (function (Dou) {
     Dou.impl = Dou.impl || {};
     Dou.TickerBase = dou.TickerBase;
@@ -3179,6 +3267,7 @@ var dou;
     Dou.Tween = dou.Tween;
     Dou.BitUtil = dou.BitUtil;
     Dou.ByteArray = dou.ByteArray;
+    Dou.Coroutine = dou.Coroutine;
     Dou.getTimer = dou.getTimer;
     Dou.HttpUtil = dou.HttpUtil;
     Dou.ObjectPool = dou.ObjectPool;

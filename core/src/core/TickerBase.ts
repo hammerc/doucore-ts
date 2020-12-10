@@ -98,6 +98,7 @@ namespace dou {
                 let interval = now - this._lastTimeStamp;
                 this._lastTimeStamp = now;
                 this.updateLogic(interval);
+                Coroutine.$update();
             }
         }
 

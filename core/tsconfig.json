@@ -113,6 +113,7 @@
     "src/utils/StringUtil.ts",
     "src/utils/superGetter.ts",
     "src/utils/superSetter.ts",
+    "src/utils/Coroutine.ts",
 
     "src/Dou.ts",
   ]

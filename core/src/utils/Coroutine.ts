@@ -5,7 +5,7 @@ namespace dou {
      */
     export namespace Coroutine {
         let _coroutineID: number = 0;
-        let _coroutineMap: { [key: number]: CoroutineInfo } = {};
+        let _coroutineList: Recyclable<CoroutineInfo>[] = [];
 
         /**
          * 启动一个协程
@@ -18,11 +18,10 @@ namespace dou {
                 return -1;
             }
             (<any>generator).__id = _coroutineID;
-            _coroutineMap[_coroutineID] = {
-                id: _coroutineID,
-                generator,
-                removed: false
-            };
+            let info = recyclable(CoroutineInfo);
+            info.id = _coroutineID;
+            info.generator = generator;
+            _coroutineList.push(info);
             return _coroutineID++;
         }
 
@@ -30,8 +29,10 @@ namespace dou {
          * 判断指定协程是否还在执行中
          */
         export function exist(id: number): boolean {
-            if (_coroutineMap.hasOwnProperty(id)) {
-                return !_coroutineMap[id].removed;
+            for (let info of _coroutineList) {
+                if (info.id == id) {
+                    return true;
+                }
             }
             return false;
         }
@@ -41,16 +42,14 @@ namespace dou {
          */
         export function resume(generator: Generator): number {
             let id = (<any>generator).__id;
-            if (_coroutineMap.hasOwnProperty(id)) {
-                _coroutineMap[id].removed = false;
+            if (exist(id)) {
                 return id;
             }
             (<any>generator).__id = _coroutineID;
-            _coroutineMap[_coroutineID] = {
-                id: _coroutineID,
-                generator,
-                removed: false
-            };
+            let info = recyclable(CoroutineInfo);
+            info.id = _coroutineID;
+            info.generator = generator;
+            _coroutineList.push(info);
             return _coroutineID++;
         }
 
@@ -58,34 +57,57 @@ namespace dou {
          * 移除协程
          */
         export function remove(id: number): Generator {
-            if (!_coroutineMap.hasOwnProperty(id)) {
-                return null;
+            for (let i = 0, len = _coroutineList.length; i < len; i++) {
+                let info = _coroutineList[i];
+                if (info.id == id) {
+                    _coroutineList[i] = null;
+                    let generator = info.generator;
+                    info.recycle();
+                    return generator;
+                }
             }
-            _coroutineMap[id].removed = true;
-            return _coroutineMap[id].generator;
+            return null;
         }
 
         export function $update(): void {
-            let map = _coroutineMap;
-            _coroutineMap = {};
-            for (let id in map) {
-                let info = map[id];
-                if (!info.removed) {
+            let list = _coroutineList;
+            if (list.length == 0) {
+                return;
+            }
+            let currentIndex = 0;
+            for (var i = 0, len = list.length; i < len; i++) {
+                let info = list[i];
+                if (info) {
                     let result = info.generator.next();
                     if (result.done) {
-                        continue;
+                        info.recycle();
+                        list[i] = null;
+                    }
+                    else {
+                        if (currentIndex != i) {
+                            list[currentIndex] = info;
+                            list[i] = null;
+                        }
+                        currentIndex++;
                     }
                 }
-                if (!info.removed) {
-                    _coroutineMap[info.id] = info;
+            }
+            if (currentIndex != i) {
+                length = list.length;
+                while (i < length) {
+                    list[currentIndex++] = list[i++];
                 }
+                list.length = currentIndex;
             }
         }
     }
 
-    interface CoroutineInfo {
-        id: number;
-        generator: Generator;
-        removed: boolean;
+    class CoroutineInfo implements ICacheable {
+        public id: number;
+        public generator: Generator;
+
+        public onRecycle(): void {
+            this.id = this.generator = null;
+        }
     }
 }
